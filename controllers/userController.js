@@ -43,11 +43,20 @@ export const loginUser = async (req, res)=>{
         if(!user){
             return res.json({success: false, message: "User not found" })
         }
+
         const isMatch = await bcrypt.compare(password, user.password)
+
         if(!isMatch){
             return res.json({success: false, message: "Invalid Credentials" })
         }
+
         const token = generateToken(user._id.toString())
+
+        if (email ===  process.env.ADMIN_EMAIL) {
+            const token = generateToken("admin")
+            return res.json({success: true, token, isAdmin: true})
+        }
+
         res.json({success: true, token})
     } catch (error) {
         console.log(error.message);

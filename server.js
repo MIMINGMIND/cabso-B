@@ -10,7 +10,7 @@ import bookingRouter from "./routes/bookingRoutes.js";
 const app = express()
 
 // Connect Database
-await connectDB()
+connectDB()
 
 // Middleware
 app.use(cors());
