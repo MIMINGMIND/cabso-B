@@ -53,7 +53,6 @@ export const loginUser = async (req, res)=>{
         const token = generateToken(user._id.toString())
 
         if (email ===  process.env.ADMIN_EMAIL) {
-            const token = generateToken("admin")
             return res.json({success: true, token, isAdmin: true})
         }
 
